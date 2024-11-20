@@ -11,7 +11,7 @@ const Navbar: FC = async () => {
       <nav className="flex justify-between items-center">
         <Link href="/">
           <Image
-            src="/startup-stream-logo.png"
+            src="/startup-stream.png"
             width={95}
             height={30}
             alt="Startup Stream"
