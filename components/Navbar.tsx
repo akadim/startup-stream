@@ -14,6 +14,7 @@ const Navbar: FC = async () => {
             src="/startup-stream.png"
             width={95}
             height={30}
+            style={{ width: "auto", height: "auto" }}
             alt="Startup Stream"
           />
         </Link>
