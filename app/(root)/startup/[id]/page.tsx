@@ -28,7 +28,7 @@ const StartupDetails = async ({
   const parsedContent = md.render(post?.pitch || "");
   return (
     <>
-      <section className="pink_container !min-h-[230px]">
+      <section className="green_container !min-h-[230px]">
         <p className="tag">{formatDate(post?._createdAt)}</p>
 
         <h1 className="heading">{post.title}</h1>

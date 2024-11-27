@@ -45,6 +45,10 @@ const config: Config = {
         200: "2px 2px 0px 2px rgb(0, 0, 0)",
         300: "2px 2px 0px 2px rgb(238, 43, 105)",
       },
+      destructive: {
+        DEFAULT: "hsl(0 84.2% 60.2%)",
+        foreground: "hsl(0 0% 98%)",
+      },
     },
   },
   plugins: [tailwindcssAnimate, typography],
