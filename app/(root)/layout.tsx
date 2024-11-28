@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 import { FC } from "react";
 
 interface LayoutProps {
@@ -12,6 +13,7 @@ const Layout: FC<LayoutProps> = ({
     <main className="font-work-sans">
       <Navbar />
       {children}
+      <Toaster />
     </main>
   );
 };

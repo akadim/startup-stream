@@ -9,6 +9,8 @@ import { formatDate } from "@/lib/utils";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
+import { auth } from "@/auth";
+import { Pencil, Trash } from "lucide-react";
 
 export const experimental_ppr = true;
 
@@ -25,10 +27,12 @@ const StartupDetails = async ({
     return notFound();
   }
 
+  const session = await auth();
+
   const parsedContent = md.render(post?.pitch || "");
   return (
     <>
-      <section className="pink_container !min-h-[230px]">
+      <section className="green_container !min-h-[230px]">
         <p className="tag">{formatDate(post?._createdAt)}</p>
 
         <h1 className="heading">{post.title}</h1>
@@ -43,7 +47,7 @@ const StartupDetails = async ({
         />
 
         <div className="space-y-5 mt-10 max-w-4xl mx-auto">
-          <div className="flex-between gap-5">
+          <div className="flex-between gap-2">
             <Link
               href={`/user/${post.author?._id}`}
               className="flex gap-2 items-center mb-3"
@@ -64,6 +68,16 @@ const StartupDetails = async ({
               </div>
             </Link>
 
+            {session && session?.id === post.author?._id && (
+              <Link href={`/startup/${post._id}/edit`}>
+                <Pencil />
+              </Link>
+            )}
+            {session && session?.id === post.author?._id && (
+              <Link href={`/startup/${post._id}/delete`}>
+                <Trash />
+              </Link>
+            )}
             <p className="category-tag">{post.category}</p>
           </div>
 

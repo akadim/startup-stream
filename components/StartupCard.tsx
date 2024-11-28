@@ -1,13 +1,15 @@
-import { EyeIcon } from "lucide-react";
+import { EyeIcon, Pencil, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { formatDate } from "@/lib/utils";
 import { Author, Startup } from "@/sanity/types";
+import { auth } from "@/auth";
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
-const StartupCard = ({ post }: { post: StartupTypeCard }) => {
+const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
+  const session = await auth();
   const {
     _id,
     _createdAt,
@@ -59,6 +61,16 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         <Link href={`/?query=${category?.toLowerCase()}`}>
           <p className="text-16-medium">{category}</p>
         </Link>
+        {session && session?.id === author?._id && (
+          <Link href={`/startup/${_id}/edit`}>
+            <Pencil />
+          </Link>
+        )}
+        {session && session?.id === author?._id && (
+          <Link href={`/startup/${_id}/delete`}>
+            <Trash />
+          </Link>
+        )}
         <Button className="startup-card_btn" asChild>
           <Link href={`/startup/${_id}`}>Details</Link>
         </Button>
