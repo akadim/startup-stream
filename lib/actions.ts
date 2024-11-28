@@ -4,9 +4,9 @@ import { auth } from "@/auth";
 import { parseServerActionResponse } from "./utils";
 import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
-import { startupSchema, TStartupSchema } from "./validation";
+import { TStartupSchema } from "./validation";
 
-export const createPitch = async (startup: TStartupSchema) => {
+export const savePitch = async (startup: TStartupSchema, _id?: string) => {
   const session = await auth();
 
   if (!session) {
@@ -37,7 +37,9 @@ export const createPitch = async (startup: TStartupSchema) => {
       pitch,
     };
 
-    const result = await writeClient.create({ _type: "startup", ...startup });
+    const result = !_id
+      ? await writeClient.create({ _type: "startup", ...startup })
+      : await writeClient.patch(_id).set(startup).commit();
 
     return parseServerActionResponse({
       ...result,

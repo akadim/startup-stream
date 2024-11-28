@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import MDEditor from "@uiw/react-md-editor";
@@ -9,47 +8,44 @@ import { Send } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { startupSchema, TStartupSchema } from "@/lib/validation";
 import { useToast } from "@/hooks/use-toast";
-import { createPitch } from "@/lib/actions";
-import { FieldErrors, useForm } from "react-hook-form";
+import { savePitch } from "@/lib/actions";
+import { Controller, FieldErrors, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const StartupForm = () => {
+const StartupForm = ({ startup }: any = {}) => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setValue,
-    trigger,
+    control,
   } = useForm<TStartupSchema>({
     resolver: zodResolver(startupSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      category: "",
-      link: "",
+      title: startup?.title || "",
+      description: startup?.description || "",
+      category: startup?.category || "",
+      link: startup?.image || "",
+      pitch: startup?.pitch || "",
     },
   });
-  const [pitch, setPitch] = useState("");
+
   const { toast } = useToast();
   const router = useRouter();
 
-  useEffect(() => {
-    setValue("pitch", pitch);
-    trigger("pitch");
-  }, [pitch, setValue, trigger]);
-
   const handleFormSubmit = async (startupData: TStartupSchema) => {
     try {
-      const result = await createPitch(startupData);
+      const result = await savePitch(startupData, startup?._id);
 
       if (result.status === "SUCCESS") {
         toast({
           title: "Success",
-          description: "Your startup pitch has been created successfully!",
+          description: "Your startup pitch has been saved successfully!",
+          className: "bg-green-500",
         });
 
         router.push(`/startup/${result._id}`);
       }
+
       return result;
     } catch (error) {
       toast({
@@ -69,7 +65,7 @@ const StartupForm = () => {
   const onError = (errors: FieldErrors<TStartupSchema>) => {
     toast({
       title: "Error",
-      description: "Validation Errors, please check the form",
+      description: "Please check your inputs and try again",
       variant: "destructive",
       className: "bg-red-500",
     });
@@ -105,6 +101,7 @@ const StartupForm = () => {
           id="description"
           name="description"
           className="startup-form_textarea"
+          required
           placeholder="Startup Description"
         />
 
@@ -122,6 +119,7 @@ const StartupForm = () => {
           id="category"
           name="category"
           className="startup-form_input"
+          required
           placeholder="Startup Category (Tech, Health, Education"
         />
 
@@ -139,7 +137,9 @@ const StartupForm = () => {
           id="link"
           name="link"
           className="startup-form_input"
+          required
           placeholder="Startup Image URL"
+          defaultValue={startup?.image}
         />
 
         {errors.link && (
@@ -151,20 +151,26 @@ const StartupForm = () => {
           Pitch
         </label>
 
-        <MDEditor
-          value={pitch}
-          onChange={(value) => setPitch(value as string)}
-          id="pitch"
-          preview="edit"
-          height={300}
-          style={{ borderRadius: 20, overflow: "hidden" }}
-          textareaProps={{
-            placeholder:
-              "Briefly describe your idea and what problem it solves",
-          }}
-          previewOptions={{
-            disallowedElements: ["style"],
-          }}
+        <Controller
+          name="pitch"
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <MDEditor
+              value={value}
+              onChange={(newValue) => onChange(newValue || "")}
+              id="pitch"
+              preview="edit"
+              height={300}
+              style={{ borderRadius: 20, overflow: "hidden" }}
+              textareaProps={{
+                placeholder:
+                  "Briefly describe your idea and what problem it solves",
+              }}
+              previewOptions={{
+                disallowedElements: ["style"],
+              }}
+            />
+          )}
         />
 
         {errors.pitch && (

@@ -155,7 +155,6 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
-      variant: props.variant || "default",
       onOpenChange: (open) => {
         if (!open) dismiss();
       },
