@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.2",
     "@sanity/image-url": "^1.1.0",

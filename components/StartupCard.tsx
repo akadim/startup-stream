@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { formatDate } from "@/lib/utils";
 import { Author, Startup } from "@/sanity/types";
 import { auth } from "@/auth";
+import DeleteButton from "./DeleteButton";
 
 export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author };
 
@@ -66,11 +67,7 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
             <Pencil />
           </Link>
         )}
-        {session && session?.id === author?._id && (
-          <Link href={`/startup/${_id}/delete`}>
-            <Trash />
-          </Link>
-        )}
+        {session && session?.id === author?._id && <DeleteButton id={_id} />}
         <Button className="startup-card_btn" asChild>
           <Link href={`/startup/${_id}`}>Details</Link>
         </Button>

@@ -11,6 +11,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import View from "@/components/View";
 import { auth } from "@/auth";
 import { Pencil, Trash } from "lucide-react";
+import DeleteButton from "@/components/DeleteButton";
 
 export const experimental_ppr = true;
 
@@ -74,9 +75,7 @@ const StartupDetails = async ({
               </Link>
             )}
             {session && session?.id === post.author?._id && (
-              <Link href={`/startup/${post._id}/delete`}>
-                <Trash />
-              </Link>
+              <DeleteButton id={post._id} />
             )}
             <p className="category-tag">{post.category}</p>
           </div>

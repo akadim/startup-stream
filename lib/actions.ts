@@ -55,3 +55,24 @@ export const savePitch = async (startup: TStartupSchema, _id?: string) => {
     });
   }
 };
+
+export const deletePitch = async (id: string) => {
+  const session = await auth();
+
+  if (!session) {
+    return parseServerActionResponse({
+      error: "Not signed in",
+      status: "ERROR",
+    });
+  }
+
+  try {
+    await writeClient.delete(id);
+    return parseServerActionResponse({ error: "", status: "SUCCESS" });
+  } catch (error) {
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+  }
+};
