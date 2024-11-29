@@ -46,13 +46,13 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
             alt={author?.name!}
             width={48}
             height={48}
-            style={{ width: "auto", height: "auto" }}
+            style={{ objectFit: "cover" }}
             className="rounded-full"
           />
         </Link>
       </div>
 
-      <Link href={`/startup/${_id}`}>
+      <Link href={`/startup/${_id}`} prefetch={true}>
         <p className="startup-card_desc">{description}</p>
 
         <img src={image} alt="placeholder" className="startup-card_img" />

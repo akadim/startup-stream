@@ -1,7 +1,11 @@
 import SearchForm from "@/components/SearchForm";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import StartupCardSkeleton from "@/components/StartupCardSkeleton";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { Suspense } from "react";
+
+export const experimental_ppr = true;
 
 export default async function Home({
   searchParams,
@@ -33,15 +37,17 @@ export default async function Home({
           {query ? `Search results for "${query}"` : "All Startups"}
         </p>
 
-        <ul className="mt-7 card_grid">
-          {posts?.length > 0 ? (
-            posts?.map((post: StartupTypeCard, index: number) => (
-              <StartupCard post={post} key={index} />
-            ))
-          ) : (
-            <p className="no-results">No startups found</p>
-          )}
-        </ul>
+        <Suspense fallback={<StartupCardSkeleton />}>
+          <ul className="mt-7 card_grid">
+            {posts?.length > 0 ? (
+              posts?.map((post: StartupTypeCard, index: number) => (
+                <StartupCard post={post} key={index} />
+              ))
+            ) : (
+              <p className="no-results">No startups found</p>
+            )}
+          </ul>
+        </Suspense>
       </section>
 
       <SanityLive />

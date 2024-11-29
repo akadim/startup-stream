@@ -22,7 +22,9 @@ const Navbar: FC = async () => {
         <div className="flex items-center gap-5 text-black">
           {session && session?.user ? (
             <>
-              <Link href="/startup/create">Create</Link>
+              <Link href="/startup/create" prefetch={true}>
+                Create
+              </Link>
 
               <form
                 action={async () => {
