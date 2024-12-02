@@ -1,4 +1,4 @@
-import { EyeIcon, Pencil, Trash } from "lucide-react";
+import { EyeIcon, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -34,7 +34,9 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
       <div className="flex-between mt-5 gap-5">
         <div className="flex-1">
           <Link href={`/user/${author?._id}`}>
-            <p className="text-16-medium line-clamp-1">{author?.name}</p>
+            <p className="text-16-medium line-clamp-1">
+              {author?.name} - {image}
+            </p>
           </Link>
           <Link href={`/startup/${_id}`}>
             <h3 className="text-26-semibold line-clamp-1">{title}</h3>
