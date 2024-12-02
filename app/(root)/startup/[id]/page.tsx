@@ -50,9 +50,11 @@ const StartupDetails = async ({
       </section>
 
       <section className="section_container">
-        <img
+        <Image
           src={post.image}
           alt="thumbnail"
+          width={500}
+          height={250}
           className="w-full h-auto rounded-xl"
         />
 

@@ -13,13 +13,12 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { deletePitch } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 
 const DeleteButton = ({ id }: { id: string }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isRouterReady, setIsRouterReady] = useState(false);
   const router = useRouter();
 
   const handleDelete = async () => {
