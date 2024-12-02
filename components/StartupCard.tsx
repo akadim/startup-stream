@@ -54,9 +54,15 @@ const StartupCard = async ({ post }: { post: StartupTypeCard }) => {
         </Link>
       </div>
 
-      <Link href={`/startup/${_id}`} prefetch={true}>
+      <Link href={`/startup/${_id}`}>
         <p className="startup-card_desc">{description}</p>
-        <Image src={image!} alt="placeholder" className="startup-card_img" />
+        <Image
+          src={image!}
+          alt="placeholder"
+          width={200}
+          height={164}
+          className="startup-card_img"
+        />
       </Link>
 
       <div className="flex-between gap-3 mt-5">
