@@ -15,6 +15,7 @@ import { schema } from "./sanity/schemaTypes";
 import { structure } from "./sanity/structure";
 
 export default defineConfig({
+  cors: ["https://startup-stream.vercel.app", "http://localhost:3000"],
   basePath: "/studio",
   projectId,
   dataset,
