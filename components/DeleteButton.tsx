@@ -33,7 +33,10 @@ const DeleteButton = ({ id }: { id: string }) => {
     <>
       <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <AlertDialogTrigger asChild>
-          <Button onClick={() => setIsDialogOpen(true)}>
+          <Button
+            onClick={() => setIsDialogOpen(true)}
+            className="bg-transparent"
+          >
             <Trash />
           </Button>
         </AlertDialogTrigger>

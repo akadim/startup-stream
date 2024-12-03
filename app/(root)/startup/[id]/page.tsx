@@ -16,6 +16,7 @@ import { auth } from "@/auth";
 import { Pencil, Trash } from "lucide-react";
 import DeleteButton from "@/components/DeleteButton";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
+import EditButton from "@/components/EditButton";
 
 export const experimental_ppr = true;
 
@@ -81,9 +82,7 @@ const StartupDetails = async ({
             </Link>
 
             {session && session?.id === post.author?._id && (
-              <Link href={`/startup/${post._id}/edit`}>
-                <Pencil />
-              </Link>
+              <EditButton id={post._id} />
             )}
             {session && session?.id === post.author?._id && (
               <DeleteButton id={post._id} />

@@ -6,7 +6,6 @@ import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { Suspense } from "react";
 
 export const experimental_ppr = true;
-export const dynamic = "force-static";
 export const revalidate = 60;
 
 export default async function Home({
