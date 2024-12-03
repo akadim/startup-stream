@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./auth";
 
-const publicRoutes = ["/", "/login", "/api/auth/callback/github"];
+const publicRoutes = ["/", "/login", "/api/auth/callback/github", "/studio"];
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
