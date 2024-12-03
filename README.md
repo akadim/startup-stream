@@ -3,7 +3,7 @@
 - A Project Similar to Y Incubator where great minds can share their Startup information
 - The Project is made with Next.js 15, while making sure to benefit from the Partial Prerendering
 - The content of the startups are handled through the use of the Headless CMS "Sanity"
-- Live Demo: [Click here]()
+- Live Demo: [Click here](https://startup-stream.vercel.app)
 
 ## Getting Started
 
